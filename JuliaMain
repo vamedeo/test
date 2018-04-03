@@ -1,5 +1,5 @@
 package Vraag2;
-
+//Ik zou dit veranderen.
 public class JuliaMain {
 	public static void main(String[] args) {
 		Juliafractaal(500, -0.70176, -0.3842, 5);
