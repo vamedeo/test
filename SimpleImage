@@ -1,0 +1,53 @@
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class SimpleImage {
+	
+	private int width, height;
+	BufferedImage data;
+		
+	public SimpleImage(int width, int height) {
+		this.setWidth(width);
+		this.setHeight(height);
+			
+		data = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+		}
+		
+	void setPixel(int row, int col, int value) {
+		//data.setRGB(col, row, value);
+		data.setRGB(col, row, Color.getHSBColor((float)value/255, 0.7f,0.7f).getRGB());
+	}
+		
+	short getPixel(int row, int col) {
+		return (short) data.getRGB(col, row);
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+		
+	public void show() {
+		JFrame f = new JFrame("SimpleImage");
+		f.setSize(width, height);
+		f.setResizable(false);
+		f.add(new JLabel(new ImageIcon(data)));
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+	}
+
+}
