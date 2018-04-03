@@ -1,0 +1,42 @@
+package Vraag2;
+
+public class JuliaMain {
+	public static void main(String[] args) {
+		Juliafractaal(500, -0.70176, -0.3842, 5);
+		Juliafractaal(500, -0.7269, 0.1889, 5);
+		Juliafractaal(500, 0, -0.8, 5);
+		Juliafractaal(500, 0.285, 0.01, 5);
+	}
+		
+	public static double[] linspace(double start, double end, int nr_points) {
+		double[] arr = new double[nr_points];
+		double stap = (end-start)/(nr_points-1);
+		for (int i = 0; i < nr_points; i++) {
+			arr[i] = start + stap * i;
+		}
+	
+		return arr;
+	}
+		
+	public static void Juliafractaal(int aantal_pixels, double Re_deel_c, double Im_deel_c, int M) {
+		SimpleImage image = new SimpleImage(aantal_pixels, aantal_pixels);
+		ComplexNumber c = new ComplexNumber(Re_deel_c, Im_deel_c);
+		double[] x_waarden = linspace(-1,1,aantal_pixels);
+		double[] y_waarden = linspace(-1,1,aantal_pixels);
+		
+		for (int i = 0; i < aantal_pixels; i++) {
+			for (int j = 0 ; j < aantal_pixels; j++){
+				int counter = 1;
+				ComplexNumber z = new ComplexNumber(x_waarden[i], y_waarden[j]);
+				while (counter < 266 && z.norm() <= M) {
+					z = ComplexNumber.sum(ComplexNumber.product(z, z), c);
+					counter++;
+				image.setPixel(i, j, counter);
+				}
+			}
+		}
+		
+		image.show();
+	}
+
+}
